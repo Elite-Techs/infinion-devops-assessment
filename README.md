@@ -112,5 +112,4 @@ This project demonstrates proficiency in:
 🪟 Windows PowerShell Scripting
 
 🔐 Security-Aware Infrastructure Setup
-
-<p align="center"> <b>⭐ If you found this project helpful, please give it a star!</b><br/> 💬 <i>Open to DevOps, IT Support, and Cybersecurity collaborations.</i> </p> ```
+ 
