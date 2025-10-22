@@ -1,23 +1,28 @@
-name: Test Self-Hosted Runner 
+name: Test Windows PowerShell Runner
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
-  test:
+  test-runner:
     runs-on: self-hosted
+
     steps:
-      - name: Verify runner connection
-        run: echo "✅ Self-hosted runner connected successfully!"
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - name: Show current directory
-        run: echo "Current directory is %CD%"
-
-      - name: List files
-        run: dir
-
-      - name: Check Windows PowerShell
+      - name: Verify PowerShell
         shell: powershell
         run: |
-          Write-Host "✅ Windows PowerShell is working on self-hosted runner."
+          Write-Host "✅ PowerShell is working on the self-hosted Windows runner."
           Get-Date
+          Get-Location
+
+      - name: Test simple command
+        shell: powershell
+        run: |
+          Write-Host "Running a simple test script..."
+          $env:COMPUTERNAME
+          Get-Service | Select-Object -First 5
