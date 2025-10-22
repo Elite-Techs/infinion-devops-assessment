@@ -1,33 +1,23 @@
-name: Test Self-Hosted Runner
+name: Test Self-Hosted Runner 
 
 on:
-  push:
-    branches: [ main ]
   workflow_dispatch:
 
 jobs:
-  test-runner:
+  test:
     runs-on: self-hosted
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - name: Verify runner connection
+        run: echo "✅ Self-hosted runner connected successfully!"
 
-      - name: Display system information
-        run: |
-          echo "Running on self-hosted Windows machine"
-          systeminfo | findstr /B /C:"OS Name" /C:"OS Version"
-          echo "Username: $env:USERNAME"
-          echo "Computer Name: $env:COMPUTERNAME"
+      - name: Show current directory
+        run: echo "Current directory is %CD%"
 
-      - name: Test PowerShell command
-        shell: pwsh
-        run: |
-          Write-Host "✅ PowerShell is working on self-hosted runner."
-          Get-Date
-
-      - name: List files in repository
+      - name: List files
         run: dir
 
-      - name: Success confirmation
-        run: echo "🎯 Self-hosted runner test completed successfully!"
+      - name: Check Windows PowerShell
+        shell: powershell
+        run: |
+          Write-Host "✅ Windows PowerShell is working on self-hosted runner."
+          Get-Date
